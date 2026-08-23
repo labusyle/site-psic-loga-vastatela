@@ -1,0 +1,38 @@
+/* Custom CSS for Psicóloga Rebekka */
+
+/* Smooth scroll for anchor links */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Offset for the sticky header */
+}
+
+/* Base styles that Tailwind might not cover exactly */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Small transitions and utilities */
+.transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+/* Formatted scrollbar for a nicer look */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FBF4ED; /* bg-background */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D3C3B1; /* bg-secondary */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #707169; /* bg-primary */
+}
