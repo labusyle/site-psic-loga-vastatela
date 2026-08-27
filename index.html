@@ -1012,8 +1012,28 @@
         </div>
     </footer>
 
-    <!-- Script para garantir o Smooth Scroll (rolagem suave) -->
+    <!-- Script para garantir o Smooth Scroll (rolagem suave) customizado -->
     <script>
+        function customSmoothScroll(targetPosition, duration) {
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            let startTime = null;
+
+            function animation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const progress = Math.min(timeElapsed / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3); // Suavização (easeOutCubic)
+                
+                window.scrollTo(0, startPosition + distance * ease);
+
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            requestAnimationFrame(animation);
+        }
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
@@ -1022,14 +1042,11 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     e.preventDefault();
-                    const headerOffset = 80;
+                    const headerOffset = 80; // Altura do cabeçalho
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
               
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
+                    customSmoothScroll(offsetPosition, 600); // 600 milissegundos
                 }
             });
         });
